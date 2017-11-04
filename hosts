@@ -1,0 +1,11 @@
+## Hosts File Entries for Ansible Playbook
+
+##LB Server
+[lbservers]
+gedevlb01 ansible_ssh_host=192.168.30.11 ansible_ssh_user=ansible
+
+##Web Server
+[webservers]
+gedevweb01 ansible_ssh_host=192.168.30.12 ansible_ssh_user=ansible
+gedevweb02 ansible_ssh_host=192.168.30.13 ansible_ssh_user=ansible
+

@@ -1,0 +1,20 @@
+---
+
+- name: Main HAProxy [LoadBalance] configuration and start/restart
+  hosts: lbservers 
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+
+  roles:
+    - lbservers 
+
+- name: Main configuration for Nginx [Hosting]
+  hosts: webservers 
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+
+  roles:
+    - webservers 
+

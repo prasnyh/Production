@@ -1,0 +1,10 @@
+---
+# Variables for HAProxy
+# HAProxy Listening port configured as 80 as per requirement, mode as http and LB algorithm as roundrobin
+haproxy_port: 80
+
+#HAProxy http support mode
+haproxy_mode: http
+
+# LoadBalancing Algorithm
+haproxy_algorithm: roundrobin

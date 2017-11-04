@@ -1,0 +1,46 @@
+global
+    #local2.*    /var/log/haproxy.log
+    log         127.0.0.1 local2
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option 		    http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
+
+frontend  main
+  bind *:{{ haproxy_port }}
+  option http-server-close
+  option forwardfor
+  default_backend app
+
+#---------------------------------------------------------------------
+# round robin balancing between the backend
+#---------------------------------------------------------------------
+backend app
+    mode {{ haproxy_mode }}
+    balance    {{ haproxy_algorithm }}
+    reqrep ^([^\ ]*\ /)defrootpage[/]?(.*)     \1\2
+    server  app1 192.168.30.12:8085 check fall 3 rise 2
+    server  app2 192.168.30.13:8085 check fall 3 rise 2

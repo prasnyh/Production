@@ -1,0 +1,31 @@
+---
+- name: Add repository
+  yum_repository:
+    name: nginx
+    description: NGINX YUM repo
+    baseurl: http://nginx.org/packages/centos/6/x86_64/
+    gpgcheck: no
+    enabled: yes
+
+- script: /etc/ansible/roles/webservers/files/prepareURLredir.sh
+
+- sysctl:
+    name: net.core.somaxconn
+    value: 4096
+    sysctl_set: yes
+    state: present
+    reload: no
+
+- name: Install nginx
+  yum: name=nginx state=present
+
+- name: Apply nginx Site Specific Template 
+  template: src=www.webexample.com.conf.j2 dest=/etc/nginx/conf.d/www.webexample.com.conf
+  notify: restart nginx
+
+- name: Apply nginx configuration template 
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  notify: restart nginx
+
+- name: Start/Restart the Nginx service
+  service: name=nginx state=started enabled=yes

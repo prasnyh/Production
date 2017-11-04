@@ -1,0 +1,8 @@
+---
+# Nginx site specific config file variables 
+
+# Nginx Listen on Port 8085
+nginx_listening_port      : 8085
+
+# BackLog Parameter Value - Nginx Tuning, part of somaxconnection kernel parameter
+blparam :       4096
