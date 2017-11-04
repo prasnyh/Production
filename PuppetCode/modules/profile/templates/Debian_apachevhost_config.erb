@@ -1,0 +1,19 @@
+<VirtualHost www.webexample.com:80>
+  ServerName www.webexample.com
+  DocumentRoot "/www/docs/www.webexample.com"
+  ServerName www.webexample.com
+  ErrorLog "logs/www.webexample.com-error_log"
+  TransferLog "logs/www.webexample.com-access_log"
+</VirtualHost>
+<Directory "/www/docs/www.webexample.com">
+    Options FollowSymLinks Multiviews
+    MultiviewsMatch Any
+    AllowOverride All
+    Require all granted
+</Directory>
+<Directory /www/docs/www.webexample.com/listing>
+Options Indexes FollowSymLinks
+</Directory>
+    Redirect "/*" "https://puppet.com/"
+    Alias "/probe_local" "/www/docs/www.webexample.com"
+    Alias "/probe_listing" "/www/docs/www.webexample.com/listing"

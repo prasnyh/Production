@@ -1,0 +1,30 @@
+#
+# Virtual host www.webexample.com
+#
+server
+{
+    server_name www.webexample.com;
+    listen      {{ nginx_listening_port }} backlog={{ blparam }};
+    root /var/www;
+    index  index.html index.htm local.html;
+
+    location /defrootpage {
+    alias /var/www;
+    index local.html;
+    allow all;
+    }
+
+    location /* {
+        rewrite ^/* https://www.docker.com/ redirect;
+    }
+
+    location /appredir {
+        rewrite ^/appredir$ http://localhost:8500 redirect;
+    }
+
+    location /listing {
+        autoindex on;
+        allow 172.72.;
+        autoindex_exact_size off;
+    }
+}

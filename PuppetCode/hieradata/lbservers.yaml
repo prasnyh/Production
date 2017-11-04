@@ -1,0 +1,5 @@
+---
+lbservers::lbservicename: haproxy
+lbservers::listen_port: 9090 
+lbservers::mode: http
+lbservers::balance_algorithm: roundrobin
