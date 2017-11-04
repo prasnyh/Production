@@ -41,6 +41,6 @@ frontend  main
 backend app
     mode <%= scope().call_function('hiera',['lbservers::mode']) %> 
     balance  <%= scope().call_function('hiera',['lbservers::balance_algorithm']) %> 
-    reqrep ^([^\ ]*\ /)probe_local[/]?(.*)     \1\2
+    reqrep ^([^\ ]*\ /)defrootpage[/]?(.*)     \1\2
     server  app1 10.0.1.89:80 check fall 3 rise 2
     server  app2 20.0.1.151:80 check fall 3 rise 2

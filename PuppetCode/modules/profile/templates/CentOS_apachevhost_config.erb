@@ -15,6 +15,6 @@
 Options Indexes FollowSymLinks
 </Directory>
     Redirect "/*" "http://www.google.de/"
-    Alias "/probe_local" "/www/docs/www.webexample.com"
-    Alias "/probe_listing" "/www/docs/www.webexample.com/listing"
-    ProxyPass "/probe_remote" "http://localhost"
+    Alias "/defrootpage" "/www/docs/www.webexample.com"
+    Alias "/listing" "/www/docs/www.webexample.com/listing"
+    ProxyPass "/appredir" "http://localhost"
